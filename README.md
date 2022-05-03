@@ -1,7 +1,7 @@
 # _Data Scientist Interview Task_
 
-#### _This interview consist of three questions
-    1. Movie categorization
+#### This interview consist of three questions
+    ## 1. Movie categorization
     You are given millions of movies and a list of thousands of movie categories (names
     only e.g. “Sci Fi Movies”, “Romantic Movies”). Your task is to assign each movie to at
     least one of the movie categories. Each movie has a title, description and poster.
@@ -14,7 +14,7 @@
     ● Short discussion about alternative approaches you might have considered and
     their pro and cons_
 
-    2. Word count in PySpark
+    ## 2. Word count in PySpark
     The goal of this task is to count the words of a given dataset.
     The tasks to do are:
     a. Download the data set over which to run word count from the following link:
@@ -27,7 +27,7 @@
     ● Documentation that explains how to run the code
     ● The result of the word count
 
-    3. Movies view estimations in Python
+    ## 3. Movies view estimations in Python
     The goal of this task is to implement a model in python to estimate the number of views
     a movie has.
     You have the following data available:

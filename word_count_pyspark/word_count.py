@@ -108,7 +108,6 @@ if __name__ == "__main__":
     parser.add_argument(
         "--load_file",
         type = str,
-        default= 'biographies.txt',
         help= "File location"
     )
 
