@@ -19,7 +19,7 @@ def filtering_data(load_file:str, filter_word:str) -> None:
     writeFile = open('updated_.txt', 'w')
     with open(load_file, encoding = "ISO-8859-1") as f:
         
-          for line in f:
+        for line in f:
             try:
               if not (line.startswith('BG:')): 
                 line = re.sub('[^A-Za-z0-9]+', ' ', line)
@@ -30,12 +30,7 @@ def filtering_data(load_file:str, filter_word:str) -> None:
                 writeFile.write(line) # Saving the filtered lines in a seperate file as updateFile.txt
             except UnicodeDecodeError:
               pass
-            for line in f:
-                try:
-                    if not (line.startswith(filter_word)): 
-                        writeFile.write(line)
-                except UnicodeDecodeError:
-                    pass
+                
 
 def word_count(text_file):
     """
