@@ -6,8 +6,12 @@ import pyspark
 from pyspark.sql import SparkSession
 import argparse
 import os 
+import re
 import pandas as pd
+from pathlib import Path
 
+FILE = Path(__file__).resolve()
+ROOT = FILE.parents[0]
 os.environ['PYSPARK_PYTHON'] = "./environment/bin/python"
 
 
@@ -15,21 +19,26 @@ def filtering_data(load_file:str, filter_word:str) -> None:
     """
     Given a file_path to filter the line starts with 'BG:' and write it to a new file location - filtered_path 
     for furthur processing.
-    """
-    writeFile = open('updated_.txt', 'w')
-    with open(load_file, encoding = "ISO-8859-1") as f:
-        
-        for line in f:
-            try:
-              if not (line.startswith('BG:')): 
-                line = re.sub('[^A-Za-z0-9]+', ' ', line)
-                line = re.sub(r'[0-9]', ' ', line)
-                print(line) 
-                # break
 
-                writeFile.write(line) # Saving the filtered lines in a seperate file as updateFile.txt
-            except UnicodeDecodeError:
-              pass
+    Args: 
+        load_file - file location to be filtered
+        filter_word - lines to be filtered with specific string
+    """
+    writeFile = open('updated_.txt', 'w') # Creating a file to save the filtered lines 
+    try:
+        with open(load_file, encoding = "ISO-8859-1") as f:
+            for line in f:
+                try:
+                    if not (line.startswith(filter_word)):  # Only allowing lines starts with the given filter word
+                        line = re.sub('[^A-Za-z0-9]+', ' ', line) # replacing the special characters 
+                        line = re.sub(r'[0-9]', ' ', line) # removing digits 
+                        # break
+                        writeFile.write(line) # Saving the filtered lines in a seperate file as updateFile.txt
+                
+                except UnicodeDecodeError:
+                    pass
+    except FileNotFoundError:
+        raise Exception("Upload the txt file. Eg - python word_count_pyspark/word_count.py --load_file <file location>")
                 
 
 def word_count(text_file):
@@ -58,8 +67,9 @@ def create_df(data_df: list):
 
     return df
 
-def create_csv(df: pd.DataFrame, count_location:str):
-    df.to_csv(count_location + "word_count.csv")
+def create_csv(df: pd.DataFrame):
+    
+    df.to_csv( ROOT / "word_count.csv") # Final dataframe with word count
 
     
 def main(args):
@@ -70,8 +80,12 @@ def main(args):
     Args:
         args (argparse.Namespace): arguments parsed from the command line
     """
-
-    
+    # Create Spark session and context
+    spark = spark = SparkSession.builder\
+                    .master("local")\
+                    .appName('word_count')\
+                    .getOrCreate()
+    sc=spark.sparkContext
 
     filtering_data(args.load_file, args.filter_word)
 
@@ -93,21 +107,11 @@ def main(args):
     # Creating a dataframe and saving the result in a CSV
     df = create_df(data_df)
 
-    create_csv(df, args.count_location)
+    create_csv(df)
 
 
 if __name__ == "__main__":
 
-    """
-    Starting a spark cluster
-    """
-
-    # Create Spark session and context
-    spark = spark = SparkSession.builder\
-                    .master("local")\
-                    .appName('word_count')\
-                    .getOrCreate()
-    sc=spark.sparkContext
     parser = argparse.ArgumentParser(
         description= "Finding the number of words in the dataset"
     )
@@ -115,6 +119,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--load_file",
         type = str,
+        default= '/Users/venketeshprasathmanoharan/Downloads/biographies.txt',
         help= "File location"
     )
 
@@ -124,12 +129,6 @@ if __name__ == "__main__":
         type = str,
         default= 'BG:',
         help = "Filter word"
-    )
-
-    parser.add_argument(
-        "--count_location",
-        type = str,
-        help= "result location path"
     )
 
     args = parser.parse_args()
