@@ -74,7 +74,11 @@ Clone the project
 cd word_count_pyspark
 
 ```bash
-python word_count.py --load_file <file_location:str>, --filter_word <filter_word:str>
+python word_count.py  # Default filter word: 'BG:'
+```
+```bash
+
+python word_count.py --load_file <file_location:str>, --filter_word <filter_word:str> # choose filter word if needed
 ```
 Result of word count
 ```bash
@@ -87,7 +91,7 @@ Note : Should require JDK@8
 cd movie_views
 
 ```bash
-python movie.py --load_file <file_location:str>, --model_type <choices=['linear_regression', 'Xgboost_regression', 'Random_forest_reg'], Default: It take all model and estimate views for each one of them!>
+python movie.py --load_file <file_location:str>, --model_type <model_name> # model_name =['linear_regression', 'Xgboost_regression', 'Random_forest_reg'], Default: It take all model and estimate views for each one of them!
 ```
 Description about the chosen approach and its pros and cons /
 Short discussion about alternative approaches and
