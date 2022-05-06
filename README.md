@@ -56,13 +56,18 @@
 
 * _Python_
 * _Pyspark_
-* _Streamlit_
 * _Docker_
 
 ## Setup/Installation Requirements
 
 * _Install docker in system_
 * _Run: "docker-compose up" in your terminal inside your project folder path
+* Git clone repo
+* To estimate the movie views:
+    * Go to the movie_views directory 
+    * python movie.py --model_type <model_name> : Choice ['linear_regression', 'Xgboost_regression', 'Random_forest_reg'] to choose any regression model as per the choice, default: It estimates views for all model and the output is saved in pred.csv
+    
+
 
 
 ## App Link
