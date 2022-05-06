@@ -1,7 +1,9 @@
-# _Data Scientist Interview Task_
+
+# DataScience Interview Tasks
 
 #### This interview consist of three questions
-    ## 1. Movie categorization
+    1. Movie categorization
+
     You are given millions of movies and a list of thousands of movie categories (names
     only e.g. “Sci Fi Movies”, “Romantic Movies”). Your task is to assign each movie to at
     least one of the movie categories. Each movie has a title, description and poster.
@@ -14,7 +16,8 @@
     ● Short discussion about alternative approaches you might have considered and
     their pro and cons_
 
-    ## 2. Word count in PySpark
+    2. Word count in PySpark
+
     The goal of this task is to count the words of a given dataset.
     The tasks to do are:
     a. Download the data set over which to run word count from the following link:
@@ -27,7 +30,8 @@
     ● Documentation that explains how to run the code
     ● The result of the word count
 
-    ## 3. Movies view estimations in Python
+    3. Movies view estimations in Python
+
     The goal of this task is to implement a model in python to estimate the number of views
     a movie has.
     You have the following data available:
@@ -50,30 +54,51 @@
     ● Short discussion about alternative approaches you might have considered and
     their pro and cons
 
-#### Done By _**Venkatesh Prasath Manoharan**_
 
-## Technologies Used
-
-* _Python_
-* _Pyspark_
-* _Docker_
-
-## Setup/Installation Requirements
-
-* _Install docker in system_
-* _Run: "docker-compose up" in your terminal inside your project folder path
-* Git clone repo
-* To estimate the movie views:
-    * Go to the movie_views directory 
-    * python movie.py --model_type <model_name> : Choice ['linear_regression', 'Xgboost_regression', 'Random_forest_reg'] to choose any regression model as per the choice, default: It estimates views for all model and the output is saved in pred.csv
-    
+## Documentation
 
 
 
-## App Link
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/Venky0892/DataScienceTask.git
+  pip install -r requirements.txt  # install
+```
+
+## For Task 2 : Word count in PySpark
+
+cd word_count_pyspark
+
+```bash
+python word_count.py --load_file <file_location:str>, --filter_word <filter_word:str>
+```
+Result of word count
+```bash
+cd word_count_pyspark/word_count.csv
+```
+
+Note : Should require JDK@8
+## For Task 3 : Movie View Estimation
+
+cd movie_views
+
+```bash
+python movie.py --load_file <file_location:str>, --model_type <choices=['linear_regression', 'Xgboost_regression', 'Random_forest_reg'], Default: It take all model and estimate views for each one of them!>
+```
+Description about the chosen approach and its pros and cons /
+Short discussion about alternative approaches and
+their pro and cons
+
+```bash
+cd movie_views/ description_approch.txt
+```
 
 
-## Contact Information
 
-_Linkedin link https://www.linkedin.com/in/venkatesh-prasath-manoharan-918091133/_
+## 🚀 About Me
+Machine Learning and Deep Learning enthusiast and aspiring Data Scientist.
 
