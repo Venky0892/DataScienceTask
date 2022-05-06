@@ -2,7 +2,9 @@
 
 # import findspark
 # findspark.init()
+
 import pyspark
+from pyspark.conf import SparkConf
 from pyspark.sql import SparkSession
 import argparse
 import os 
@@ -12,8 +14,9 @@ from pathlib import Path
 
 FILE = Path(__file__).resolve()
 ROOT = FILE.parents[0]
-os.environ['PYSPARK_PYTHON'] = "./environment/bin/python"
 
+os.environ['PYSPARK_PYTHON'] = '/usr/bin/python'
+os.environ["PYSPARK_DRIVER_PYTHON"]= '/usr/bin/python'
 
 def filtering_data(load_file:str, filter_word:str) -> None:
     """
@@ -80,11 +83,13 @@ def main(args):
     Args:
         args (argparse.Namespace): arguments parsed from the command line
     """
+    # configure = SparkConf().set('spark.driver.host','127.0.0.1')
     # Create Spark session and context
     spark = spark = SparkSession.builder\
                     .master("local")\
                     .appName('word_count')\
                     .getOrCreate()
+    # sc = pyspark.SparkContext(master = 'local', appName='desiredName', conf=configure)
     sc=spark.sparkContext
 
     filtering_data(args.load_file, args.filter_word)
@@ -96,7 +101,8 @@ def main(args):
     total_occurence = word_count(text_file)
 
     # Printing the words and their counts
-    output = total_occurence.collect()
+    # rdd.sample(False,0.1,0).collect())
+    output = total_occurence.sample(False,0.1,0).collect()
 
     #Creating a list of tuples for words and occurence 
     data_df = list()
@@ -109,6 +115,11 @@ def main(args):
 
     create_csv(df)
 
+    # Stopping Spark-Session and Spark context
+    sc.stop()
+    spark.stop()
+
+
 
 if __name__ == "__main__":
 
@@ -119,7 +130,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--load_file",
         type = str,
-        default= '/Users/venketeshprasathmanoharan/Downloads/biographies.txt',
+        default= './biographies.txt',
         help= "File location"
     )
 
