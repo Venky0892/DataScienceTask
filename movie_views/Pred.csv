@@ -1,4 +1,4 @@
-,ID,Title,Year,Rating,Rating_count,views,XG_Boost_views,Linear_reg_views,Random_Forest_views
+,ID,Title,Year,Rating,Rating_count,views,Linear_reg_views,XG_Boost_views,Random_Forest_views
 tt0111161,tt0111161,The Shawshank Redemption,1994,9.2,2089382,,17657001,1230000,6580000
 tt0068646,tt0068646,The Godfather,1972,9.2,1433884,,16667714,1230000,6580000
 tt0071562,tt0071562,The Godfather: Part II,1974,9.0,995997,,13543335,1230000,6580000

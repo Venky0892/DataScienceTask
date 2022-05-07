@@ -167,7 +167,7 @@ def model(x, y, non_nan_df, model_type = str) -> pd.DataFrame:
         regr.fit(x, y)
         Id_list = non_nan_df['ID'].to_list()
         # Storing id of movies to estimate it views 
-        df_pred = pd.DataFrame(columns = ['ID','Title','Year', 'Rating', 'Rating_count', 'views', 'XG_Boost_views','Linear_reg_views','Random_Forest_views'])
+        df_pred = pd.DataFrame(columns = ['ID','Title','Year', 'Rating', 'Rating_count', 'views', 'Linear_reg_views', 'XG_Boost_views','Random_Forest_views'])
         for i in Id_list:
             test1 = non_nan_df[(non_nan_df['ID'] == i)]
             test = test1[['Rating ', 'Rating_count']].apply(pd.to_numeric, errors='ignore')
