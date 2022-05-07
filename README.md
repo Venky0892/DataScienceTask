@@ -69,6 +69,15 @@ Clone the project
   pip install -r requirements.txt  # install
 ```
 
+## For Task 1 : Categorization 
+
+Descriotion of movie categorization
+```bash
+cd movie_categorization/Description.txt
+```
+
+
+
 ## For Task 2 : Word count in PySpark
 
 cd word_count_pyspark
