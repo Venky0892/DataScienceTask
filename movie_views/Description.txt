@@ -1,0 +1,24 @@
+Choosen Approch to solve the given problem 
+
+
+
+    1. The movie views has to be estimated for the unknown values with just 5 values given as a ground truth.
+    2. I have choosen to start with basic linear regression, XGBoost regression and Random Forest regressor to solve this problem.
+    3. I trained the model with those 5 rows which had the ground truth values and applied the predictions for the unknown values and estimated the views.
+    4. I found out simple linear regression found out to be working better compared to the other models.
+
+Cons:
+
+    * It is not statiscally right to work with the dataset because, it had very few ground truth value to actually learn any pattern from the dataset.
+    * In real life situations this data cannot be used to estimate other values since lack of ground truth.
+    * There should be enough ground truth value to train and apply some rules to predict the estimated to a reasonable value. 
+    * Since there's little ground truth there's no enough information to find the quality of the estimation how good it is.
+
+
+
+Alternative Approch:
+
+The data should have enough data points for the ground truth value to estimate its quality of the outcome. In real life this data would not be useful or even 
+modelled to estimate any thing. Since it doesn't produce any statiscally significant value.
+    
+

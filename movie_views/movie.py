@@ -11,10 +11,19 @@ ROOT = FILE.parents[0]
 
 
 def data_read(load_file):
+    """
+    Args:
+        load_file : Input File location
+    """
 
-    return pd.read_csv(load_file)
+    return pd.read_csv(load_file) # Reading the csv file which contains info about movie
 
 def preprocessing_data(data):
+    """
+    Args:
+       Data : Dataframe to be processed and updating the values.
+    """
+
     # Creating a column Views to update the given value 
     data["views"] = ""
 
@@ -27,14 +36,17 @@ def preprocessing_data(data):
     data.loc[data['Title'] == 'Spotlight', 'views'] = 1000000
 
     # Preprocessing the data 
-
     df = data.replace(',', '', regex = True) # Removing the commas to make str object to int
     nan_value = float("NaN")
     df.replace("", nan_value, inplace=True) # Replacing Nan values to empty cells 
 
     return df 
 
-def creatingdf(df):
+def creatingdf(df) -> pd.DataFrame:
+    """
+    Args:
+        Non_nan_df : Dataframe
+    """
 
     # Create a seperate Dataframe to store values which has Nan
     non_nan_df = df[df.isna().any(axis=1)] # Nan dataframe to predict
@@ -46,12 +58,23 @@ def creatingdf(df):
 
 
 def dep_ind_variable(new):
+    """
+    Args:
+        new : Dataframe to be processed to split into dependant and independant variables  
+    """
     y = new['views']  # Dependant Variable  
     x = new.drop(['ID', 'Title', 'Year', 'views'], axis=1) # Independant variables
-    x = x.apply(pd.to_numeric, errors='ignore')
+    x = x.apply(pd.to_numeric, errors='ignore') # Changing all the values to numeric 
     return x, y
 
 def linear_regression(x, y, non_nan_df):
+    """
+    Args:
+        X : Independant Variable 
+        Y : Dependant Variable 
+        Non_nan_df : Dataframe which contains the views to be estimated 
+    """
+    # Linear regression
     reg = LinearRegression().fit(x, y)
     Id_list = non_nan_df['ID'].to_list()
 
@@ -66,6 +89,15 @@ def linear_regression(x, y, non_nan_df):
     return df_pred
 
 def XGB_regressor(x, y, non_nan_df):
+    
+    """
+    Args:
+        X : Independant Variable 
+        Y : Dependant Variable 
+        Non_nan_df : Dataframe which contains the views to be estimated 
+    """
+
+    # XGBoost Regressor 
     xg_reg = xgb.XGBRegressor(objective ='reg:linear', n_estimators=1)
     xg_reg.fit(x,y)
     Id_list = non_nan_df['ID'].to_list()
@@ -81,6 +113,14 @@ def XGB_regressor(x, y, non_nan_df):
     return df_pred
 
 def random_forest_regression(x, y, non_nan_df):
+
+    """
+    Args:
+        X : Independant Variable 
+        Y : Dependant Variable 
+        Non_nan_df : Dataframe which contains the views to be estimated 
+    """
+    #Random Forest regressor
     regr = RandomForestRegressor(max_depth=2, random_state=0)
     regr.fit(x, y)
     Id_list = non_nan_df['ID'].to_list()
@@ -97,6 +137,14 @@ def random_forest_regression(x, y, non_nan_df):
     return df_pred
 
 def model(x, y, non_nan_df, model_type = str) -> pd.DataFrame:
+
+    """
+    Args:
+        X : Independant Variable 
+        Y : Dependant Variable 
+        Model_type : Type of model to be appplied
+    
+    """
     # applying linear regression 
     if model_type == 'linear_regression':
         df_pred = linear_regression(x, y, non_nan_df)
