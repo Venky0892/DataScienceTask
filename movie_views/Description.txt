@@ -5,7 +5,7 @@ Choosen Approch to solve the given problem
     1. The movie views has to be estimated for the unknown values with just 5 values given as a ground truth.
     2. I have choosen to start with basic linear regression, XGBoost regression and Random Forest regressor to solve this problem.
     3. I trained the model with those 5 rows which had the ground truth values and applied the predictions for the unknown values and estimated the views.
-    4. I found out simple linear regression found out to be working better compared to the other models.
+    4. I found out simple linear regression found out to be working better compared to the other models. But statiscally it not right method to proceed with.
 
 Cons:
 

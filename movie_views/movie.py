@@ -5,6 +5,7 @@ import xgboost as xgb
 from sklearn.ensemble import RandomForestRegressor
 import argparse
 from pathlib import Path
+from sklearn.metrics import accuracy_score
 
 FILE = Path(__file__).resolve()
 ROOT = FILE.parents[0]
@@ -75,15 +76,18 @@ def linear_regression(x, y, non_nan_df):
         Non_nan_df : Dataframe which contains the views to be estimated 
     """
     # Linear regression
+    print(x)
+    print(y)
     reg = LinearRegression().fit(x, y)
     Id_list = non_nan_df['ID'].to_list()
+    
 
     # Storing id of movies to estimate it views 
     df_pred = pd.DataFrame(columns = ['ID','Title','Year', 'Rating', 'Rating_count', 'views', 'Linear_reg_views'])
     for i in Id_list:
         test1 = non_nan_df[(non_nan_df['ID'] == i)]
         test = test1[['Rating ', 'Rating_count']].apply(pd.to_numeric, errors='ignore')
-        test1['Linear_reg_views'] = int(abs(reg.predict(test)))
+        test1['Linear_reg_views'] = int(reg.predict(test))
         df_pred.loc[i] = test1.values[0]
 
     return df_pred
@@ -155,7 +159,7 @@ def model(x, y, non_nan_df, model_type = str) -> pd.DataFrame:
     if model_type == 'Random_forest_reg':
         df_pred = random_forest_regression(x, y, non_nan_df)
 
-    else:
+    if model_type == 'all':
         reg = LinearRegression().fit(x, y)
         xg_reg = xgb.XGBRegressor(objective ='reg:linear', n_estimators=1)
         xg_reg.fit(x,y)
@@ -167,7 +171,7 @@ def model(x, y, non_nan_df, model_type = str) -> pd.DataFrame:
         for i in Id_list:
             test1 = non_nan_df[(non_nan_df['ID'] == i)]
             test = test1[['Rating ', 'Rating_count']].apply(pd.to_numeric, errors='ignore')
-            test1['Linear_reg_views'] = int(abs(reg.predict(test)))
+            test1['Linear_reg_views'] = int(reg.predict(test))
             test1['XG_Boost_views'] = int(xg_reg.predict(test))
             test1['Random_Forest_views'] = int(regr.predict(test))
             df_pred.loc[i] = test1.values[0]
