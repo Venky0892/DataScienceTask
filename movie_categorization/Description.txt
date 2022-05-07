@@ -1,0 +1,25 @@
+Question: 
+    You are given millions of movies and a list of thousands of movie categories (names
+    only e.g. “Sci Fi Movies”, “Romantic Movies”). Your task is to assign each movie to at
+    least one of the movie categories. Each movie has a title, description and poster.
+
+Answer :
+
+ *  Process 1: By searching each category keyword in the movie description column, each movie is assigned a specific category. Whenever a category keyword appears in a movie description, it corresponds to a specific category. 
+   Each movie will be assigned a specific category. Assigning the movie to relevant categories will be accomplished by iterating the categories through all the movie descriptions.
+
+ * To verify the quality of the mapping I would research in the internet to check few movie with its categories to check its quality.
+
+ * If new category is added/ removed to the existing list, re Iterating the entire previous process (1) will work.
+
+ * If a new movie is added to the existing file, iterating process (1) to the incoming movie would assign its matching category.
+
+ Pros : 
+    * Straightforward approch 
+    * Works for medium or small size datasets 
+    
+Cons : 
+    * Consumes much time to map if the datasets is huge. O(n) complexity. 
+    * Time increases with number of inputs and vice versa
+
+ 

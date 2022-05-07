@@ -19,6 +19,7 @@ Cons:
 Alternative Approch:
 
 The data should have enough data points for the ground truth value to estimate its quality of the outcome. In real life this data would not be useful or even 
-modelled to estimate any thing. Since it doesn't produce any statiscally significant value.
+modelled to estimate any thing. Since it doesn't produce any statiscally significant value. A alternate approch would collect more data to evaluate the ground truth.
+
     
 
