@@ -187,15 +187,15 @@ def main(args):
         args (argparse.Namespace): arguments parsed from the command line
     """
     # Read file 
-    data = data_read(args.load_file)
+    data = data_read(args.load_file) # Read Data 
 
-    df =  preprocessing_data(data)
+    df =  preprocessing_data(data) # Preprocess data 
 
-    new, non_nan_df = creatingdf(df)
+    new, non_nan_df = creatingdf(df) 
 
     x, y = dep_ind_variable(new)
 
-    df_pred = model(x, y, non_nan_df, args.model_type)
+    df_pred = model(x, y, non_nan_df, args.model_type) # Choosing model type 
 
     # Storing the final estimated value in pred.csv
     df_pred.to_csv( ROOT / "Pred.csv") 
@@ -215,7 +215,7 @@ if __name__ == "__main__":
     )
 
     parser.add_argument(
-        "--model_type",
+        "--model_type", 
         type = str,
         default='all',
         choices=['linear_regression', 'Xgboost_regression', 'Random_forest_reg', 'all'],
