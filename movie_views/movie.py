@@ -191,9 +191,9 @@ def main(args):
 
     df =  preprocessing_data(data) # Preprocess data 
 
-    new, non_nan_df = creatingdf(df) 
+    new, non_nan_df = creatingdf(df)  # Creating new df's 
 
-    x, y = dep_ind_variable(new)
+    x, y = dep_ind_variable(new) # Dependant and Independant Variables 
 
     df_pred = model(x, y, non_nan_df, args.model_type) # Choosing model type 
 

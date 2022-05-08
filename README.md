@@ -107,7 +107,7 @@ Short discussion about alternative approaches and
 their pro and cons
 
 ```bash
-cd movie_views/ description_approch.txt
+cd movie_views/ Description.txt
 ```
 
 

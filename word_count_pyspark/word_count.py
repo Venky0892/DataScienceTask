@@ -102,7 +102,7 @@ def main(args):
 
     # Printing the words and their counts
     # rdd.sample(False,0.1,0).collect())
-    output = total_occurence.sample(False,0.1,0).collect()
+    output = total_occurence.collect()
 
     #Creating a list of tuples for words and occurence 
     data_df = list()

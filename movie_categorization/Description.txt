@@ -12,7 +12,7 @@ Answer :
 
  * If new category is added/ removed to the existing list, re Iterating the entire previous process (1) will work.
 
- * If a new movie is added to the existing file, iterating process (1) to the incoming movie would assign its matching category.
+ * If a new movie is added/removed to the existing file, iterating process (1) to the incoming movie would assign its matching category.
 
  Pros : 
     * Straightforward approch 
